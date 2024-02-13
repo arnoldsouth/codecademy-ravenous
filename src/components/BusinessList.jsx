@@ -1,14 +1,14 @@
 import React from 'react';
 import Business from './Business';
 
-const BusinessList = () => {
-  let businesses = [];
-
-  for (let i = 0; i < 6; i++) {
-    businesses.push(<Business />);
-  }
-
-  return <div>{businesses}</div>;
+const BusinessList = ({ businesses }) => {
+  return (
+    <div>
+      {businesses.map((business) => {
+        return <Business key={business.name} business={business} />;
+      })}
+    </div>
+  );
 };
 
 export default BusinessList;

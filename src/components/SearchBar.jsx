@@ -6,47 +6,89 @@ import {
   Input,
   Radio,
   RadioGroup,
+  Select,
   Stack,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 
-const sortBy = {
+const sortByOptions = {
   'Best Match': 'best_match',
   'Highest Rated': 'rating',
   'Most Reviewed': 'review_count',
 };
 
-const SearchBar = () => {
-  const renderSortBy = () => {
-    return Object.keys(sortBy).map((key) => {
-      let value = sortBy[key];
-      return <li key={value}>{key}</li>;
+const SearchBar = ({ searchYelpBusinesses }) => {
+  const [searchInput, setSearchInput] = useState('');
+  const [searchLocation, setSearchLocation] = useState();
+  const [sortBy, setSortBy] = useState('best_match');
+
+  const getSortByChoice = (sortByOption) => {
+    if (sortBy === sortByOption) {
+      return;
+    }
+  };
+
+  const handleSortByChange = (sortByOption) => {
+    setSortBy(sortByOption);
+  };
+
+  const handleSearchInputChange = (event) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleSearchLocationChange = (event) => {
+    setSearchLocation(event.target.value);
+  };
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+
+    searchYelpBusinesses(searchInput, searchLocation, sortBy);
+    // console.log({
+    //   searchInput,
+    //   searchLocation,
+    //   sortBy,
+    // });
+  };
+
+  const renderSortByOptions = () => {
+    return Object.keys(sortByOptions).map((sortByOption) => {
+      let optionValue = sortByOptions[sortByOption];
+      return (
+        <li key={optionValue} onClick={() => handleSortByChange(optionValue)}>
+          {sortByOption}
+        </li>
+      );
     });
   };
 
   return (
     <div>
-      {/* <ul>{renderSortBy()}</ul> */}
+      <ul>{renderSortByOptions()}</ul>
 
-      <RadioGroup onChange={renderSortBy} name="sort_by">
-        <Stack spacing={5} direction="row">
-          <Radio value="best_match">Best Match</Radio>
-          <Radio value="rating">Highest Rated</Radio>
-          <Radio value="review_count">Most Reviewed</Radio>
-        </Stack>
-      </RadioGroup>
+      <form onSubmit={handleSearchSubmit}>
+        <FormControl>
+          <FormLabel>Search...</FormLabel>
+          <Input
+            type="text"
+            width="auto"
+            placeholder="Search"
+            onChange={handleSearchInputChange}
+          />
 
-      <FormControl>
-        <FormLabel>Search...</FormLabel>
-        <Input type="text" width="auto" />
-        <FormHelperText>Input business search.</FormHelperText>
+          <FormLabel>Zip Code</FormLabel>
+          <Input
+            type="text"
+            width="auto"
+            placeholder="Location"
+            onChange={handleSearchLocationChange}
+          />
 
-        <FormLabel>Zip Code</FormLabel>
-        <Input type="number" width="auto" />
-        <FormHelperText>Input zip code search.</FormHelperText>
-
-        <Button colorScheme="blue">Search</Button>
-      </FormControl>
+          <Button type="submit" colorScheme="blue">
+            Search
+          </Button>
+        </FormControl>
+      </form>
     </div>
   );
 };
