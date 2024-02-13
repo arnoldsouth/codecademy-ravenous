@@ -1,9 +1,12 @@
 import {
+  Box,
   Button,
+  Center,
   FormControl,
   FormHelperText,
   FormLabel,
   Input,
+  List,
   Radio,
   RadioGroup,
   Select,
@@ -22,11 +25,11 @@ const SearchBar = ({ searchYelpBusinesses }) => {
   const [searchLocation, setSearchLocation] = useState();
   const [sortBy, setSortBy] = useState('best_match');
 
-  const getSortByChoice = (sortByOption) => {
-    if (sortBy === sortByOption) {
-      return;
-    }
-  };
+  // const getSortByChoice = (sortByOption) => {
+  //   if (sortBy === sortByOption) {
+  //     return;
+  //   }
+  // };
 
   const handleSortByChange = (sortByOption) => {
     setSortBy(sortByOption);
@@ -44,52 +47,64 @@ const SearchBar = ({ searchYelpBusinesses }) => {
     event.preventDefault();
 
     searchYelpBusinesses(searchInput, searchLocation, sortBy);
-    // console.log({
-    //   searchInput,
-    //   searchLocation,
-    //   sortBy,
-    // });
-  };
-
-  const renderSortByOptions = () => {
-    return Object.keys(sortByOptions).map((sortByOption) => {
-      let optionValue = sortByOptions[sortByOption];
-      return (
-        <li key={optionValue} onClick={() => handleSortByChange(optionValue)}>
-          {sortByOption}
-        </li>
-      );
+    console.log({
+      searchInput,
+      searchLocation,
+      sortBy,
     });
   };
 
+  // const renderSortByOptions = () => {
+  //   return Object.keys(sortByOptions).map((sortByOption) => {
+  //     let optionValue = sortByOptions[sortByOption];
+  //     return (
+  //       <li key={optionValue} onClick={() => handleSortByChange(optionValue)}>
+  //         {sortByOption}
+  //       </li>
+  //     );
+  //   });
+  // };
+
   return (
-    <div>
-      <ul>{renderSortByOptions()}</ul>
+    <Center>
+      <Box>
+        {/* <List>{renderSortByOptions()}</List> */}
 
-      <form onSubmit={handleSearchSubmit}>
-        <FormControl>
-          <FormLabel>Search...</FormLabel>
-          <Input
-            type="text"
-            width="auto"
-            placeholder="Search"
-            onChange={handleSearchInputChange}
-          />
+        <RadioGroup onChange={setSortBy} value={sortBy}>
+          <Stack direction="row">
+            <Radio value="best_match">Best Match</Radio>
+            <Radio value="rating">Highest Rating</Radio>
+            <Radio value="review_count">Most Reviewed</Radio>
+          </Stack>
+        </RadioGroup>
 
-          <FormLabel>Zip Code</FormLabel>
-          <Input
-            type="text"
-            width="auto"
-            placeholder="Location"
-            onChange={handleSearchLocationChange}
-          />
+        <form onSubmit={handleSearchSubmit}>
+          <FormControl>
+            <FormLabel>Search...</FormLabel>
+            <Input
+              type="text"
+              width="auto"
+              placeholder="Search"
+              size="sm"
+              onChange={handleSearchInputChange}
+            />
 
-          <Button type="submit" colorScheme="blue">
-            Search
-          </Button>
-        </FormControl>
-      </form>
-    </div>
+            <FormLabel>Zip Code</FormLabel>
+            <Input
+              type="text"
+              width="auto"
+              placeholder="Location"
+              size="sm"
+              onChange={handleSearchLocationChange}
+            />
+
+            <Button type="submit" colorScheme="blue">
+              Search
+            </Button>
+          </FormControl>
+        </form>
+      </Box>
+    </Center>
   );
 };
 

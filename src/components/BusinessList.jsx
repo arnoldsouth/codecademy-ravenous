@@ -1,13 +1,16 @@
 import React from 'react';
 import Business from './Business';
+import { Box, Center, SimpleGrid } from '@chakra-ui/react';
 
 const BusinessList = ({ businesses }) => {
   return (
-    <div>
-      {businesses.map((business) => {
-        return <Business key={business.name} business={business} />;
-      })}
-    </div>
+    <Center>
+      <SimpleGrid columns={3} spacing={10}>
+        {businesses.map((business) => {
+          return <Business key={business.id} business={business} />;
+        })}
+      </SimpleGrid>
+    </Center>
   );
 };
 
