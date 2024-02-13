@@ -43,41 +43,30 @@ const Business = ({ business }) => {
           {business.name}
         </Box>
 
-        <Box
-          display="flex"
-          justifyContent={'space-between'}
-          alignItems="baseline"
-        >
+        <Box display="flex" alignItems="baseline">
           <Box>
-            <Box color="gray.600" fontSize="sm">
-              {business.address}
+            <Box>
+              <Box color="gray.600" fontSize="sm">
+                {business.address}
+              </Box>
+              <Box color="gray.600" fontSize="sm">
+                {business.city}, {business.state} {business.zipCode}
+              </Box>
             </Box>
-            <Box color="gray.600" fontSize="sm">
-              {business.city}, {business.state} {business.zipCode}
-            </Box>
-            {/* <Box color="gray.600" fontSize="sm">
-              {business.state}
-            </Box>
-            <Box color="gray.600" fontSize="sm">
-              {business.zipCode}
-            </Box> */}
-            {/* <Box color="gray.600" fontSize="sm">
-              {business.displayAddress}
-            </Box> */}
           </Box>
-        </Box>
 
-        <Box display="flex" mt="2" alignItems="center">
-          {Array(5)
-            .fill('')
-            .map((_, i) => (
-              <StarIcon
-                key={i}
-                color={i < business.rating ? 'blue.500' : 'gray.400'}
-              />
-            ))}
-          <Box as="span" ml="2" color="gray.600" fontSize="sm">
-            {business.reviewCount} reviews
+          <Box>
+            {Array(5)
+              .fill('')
+              .map((_, i) => (
+                <StarIcon
+                  key={i}
+                  color={i < business.rating ? 'blue.500' : 'gray.400'}
+                />
+              ))}
+            <Box as="span" ml="2" color="gray.600" fontSize="sm">
+              {business.reviewCount} reviews
+            </Box>
           </Box>
         </Box>
 

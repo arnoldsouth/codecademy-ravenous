@@ -70,39 +70,53 @@ const SearchBar = ({ searchYelpBusinesses }) => {
       <Box>
         {/* <List>{renderSortByOptions()}</List> */}
 
-        <RadioGroup onChange={setSortBy} value={sortBy}>
-          <Stack direction="row">
-            <Radio value="best_match">Best Match</Radio>
-            <Radio value="rating">Highest Rating</Radio>
-            <Radio value="review_count">Most Reviewed</Radio>
-          </Stack>
-        </RadioGroup>
+        <Box mt={4}>
+          <Center>
+            <RadioGroup onChange={setSortBy} value={sortBy}>
+              <Stack direction="row">
+                <Radio value="best_match" size="sm">
+                  Best Match
+                </Radio>
+                <Radio value="rating" size="sm">
+                  Highest Rating
+                </Radio>
+                <Radio value="review_count" size="sm">
+                  Most Reviewed
+                </Radio>
+              </Stack>
+            </RadioGroup>
+          </Center>
+        </Box>
 
-        <form onSubmit={handleSearchSubmit}>
-          <FormControl>
-            <FormLabel>Search...</FormLabel>
-            <Input
-              type="text"
-              width="auto"
-              placeholder="Search"
-              size="sm"
-              onChange={handleSearchInputChange}
-            />
+        <Box mt={4}>
+          <form onSubmit={handleSearchSubmit}>
+            <Box>
+              <FormControl>
+                {/* <FormLabel>Search...</FormLabel> */}
+                <Input
+                  type="text"
+                  width="auto"
+                  placeholder="Search"
+                  size="sm"
+                  onChange={handleSearchInputChange}
+                />
 
-            <FormLabel>Zip Code</FormLabel>
-            <Input
-              type="text"
-              width="auto"
-              placeholder="Location"
-              size="sm"
-              onChange={handleSearchLocationChange}
-            />
+                {/* <FormLabel>Location</FormLabel> */}
+                <Input
+                  type="text"
+                  width="auto"
+                  placeholder="Location"
+                  size="sm"
+                  onChange={handleSearchLocationChange}
+                />
 
-            <Button type="submit" colorScheme="blue">
-              Search
-            </Button>
-          </FormControl>
-        </form>
+                <Button type="submit" colorScheme="blue" size="sm">
+                  Search
+                </Button>
+              </FormControl>
+            </Box>
+          </form>
+        </Box>
       </Box>
     </Center>
   );
