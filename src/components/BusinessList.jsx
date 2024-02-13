@@ -1,6 +1,6 @@
 import React from 'react';
 import Business from './Business';
-import { Box, Center, SimpleGrid } from '@chakra-ui/react';
+import { Center, SimpleGrid } from '@chakra-ui/react';
 
 const BusinessList = ({ businesses }) => {
   return (

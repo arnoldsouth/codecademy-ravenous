@@ -11,6 +11,7 @@ export const YelpApi = {
   search(searchInput, searchLocation, sortBy) {
     return fetch(
       `${corsAnywhere}${baseUrl}/businesses/search?term=${searchInput}&location=${searchLocation}&sort_by=${sortBy}`,
+      // `${baseUrl}/businesses/search?term=${searchInput}&location=${searchLocation}&sort_by=${sortBy}`,
       options
     )
       .then((response) => {
@@ -28,6 +29,8 @@ export const YelpApi = {
             zipCode: business.location.zip_code,
             // displayAddress: business.location.display_address,
             category: business.categories[0].title,
+            // category: business.categories.map((category) => category.title),
+            price: business.price,
             rating: business.rating,
             reviewCount: business.review_count,
           }));

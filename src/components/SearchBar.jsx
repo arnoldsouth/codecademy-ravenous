@@ -3,13 +3,9 @@ import {
   Button,
   Center,
   FormControl,
-  FormHelperText,
-  FormLabel,
   Input,
-  List,
   Radio,
   RadioGroup,
-  Select,
   Stack,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
@@ -99,6 +95,7 @@ const SearchBar = ({ searchYelpBusinesses }) => {
                   placeholder="Search"
                   size="sm"
                   onChange={handleSearchInputChange}
+                  autoComplete="off"
                 />
 
                 {/* <FormLabel>Location</FormLabel> */}
